@@ -1,51 +1,3 @@
-// const express = require('express');
-// const mysql = require('mysql2');
-// require('dotenv').config();
-// const bodyParser = require('body-parser');
-// const app = express();
-
-// app.use(bodyParser.urlencoded({ extended: false }));
-// app.set('view engine', 'ejs');
-
-// // Serve static files (like CSS) from the "public" folder
-// app.use(express.static('public'));
-
-// // MySQL Connection
-// const db = mysql.createConnection({
-//     host: process.env.DB_HOST,
-//     user: process.env.DB_USER,
-//     password: process.env.DB_PASSWORD,
-//     database: process.env.DB_DATABASE
-// });
-
-// db.connect((err) => {
-//     if (err) throw err;
-//     console.log('Connected to MySQL Database.');
-// });
-
-// // Routes
-// app.get('/', (req, res) => {
-//     res.render('index' , { dialogflowAgentId: process.env.DIALOGFLOW_AGENT_ID });
-// });
-
-// app.post('/track', (req, res) => {
-//     const trackingNumber = req.body.tracking_number;
-//     const query = 'SELECT * FROM shipments WHERE tracking_number = ?';
-//     db.query(query, [trackingNumber], (err, results) => {
-//         if (err) throw err;
-//         res.render('result', { shipment: results[0] });
-//     });
-// });
-
-// app.listen(process.env.PORT, () => {
-//     console.log(`Server started on http://localhost:${process.env.PORT}`);
-// });
-
-
-
-
-
-
 const express = require('express');
 const mysql = require('mysql2');
 require('dotenv').config(); // For loading environment variables
@@ -110,7 +62,7 @@ app.post('/track', (req, res) => {
     const query = 'SELECT * FROM shipments WHERE tracking_number = ?';
     db.query(query, [trackingNumber], (err, results) => {
         if (err) throw err;
-        res.render('result', { shipment: results[0] });
+        res.render('result', { shipment: results[0] , mapboxAccessToken: process.env.MAPBOX_ACCESS_TOKEN});
     });
 });
 
